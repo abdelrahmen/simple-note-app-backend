@@ -1,6 +1,6 @@
 let MemoryStorage = require("memorystorage");
 // here, the MemoryStorage function is available
-let myStorage = new MemoryStorage("note-app");
+let store = new MemoryStorage("note-app");
 
 exports.getKeys = (store) => {
   let keys = [];
@@ -12,6 +12,7 @@ exports.getKeys = (store) => {
 };
 
 exports.getValues = (store) => {
+  console.log(`store.length: ${store.length}`);
   let values = [];
   for (let i = 0; i < store.length; i++) {
     let key = store.key(i);
@@ -21,4 +22,4 @@ exports.getValues = (store) => {
   return values;
 };
 
-exports.myStorage = myStorage;
+exports.store = store;
