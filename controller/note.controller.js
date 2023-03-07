@@ -22,7 +22,17 @@ exports.saveNote = (req, res) => {
 };
 
 exports.updateNote = (req, res) => {
-  res.send("update note");
+  let noteId = req.body.noteId;
+  let title = req.body.title;
+  let content = req.body.content;
+  if (!title || !content || !noteId) {
+    res.status(500).send({ error: "title, content & note id are required" });
+  } else {
+    let Note = model.Note;
+    let noteObj = new Note(noteId, title, content, "admin", Date.now());
+    myStorage.store.setItem(sequenceId, noteObj);
+    res.status(200).send("note updated");
+  }
 };
 
 exports.deleteNote = (req, res) => {
